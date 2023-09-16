@@ -1,0 +1,52 @@
+# Maven generated files
+/target/
+
+# IDE-generated files (e.g., IntelliJ IDEA or Eclipse)
+/.idea/
+*.iml
+*.ipr
+*.iws
+
+# Logs
+/logs/
+*.log
+
+# Maven dependencies
+/.mvn/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+
+# Maven cache
+/.m2/
+
+# npm dependencies
+/node_modules/
+
+# IDE-specific configuration files for JavaScript
+/.vscode/
+*.swp
+*~
+
+# Configuration files
+/application.properties
+/application.yml
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output files
+/build/
+/dist/
+
+# Editor settings
+.DS_Store
