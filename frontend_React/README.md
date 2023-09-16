@@ -1,6 +1,12 @@
 # React + TypeScript + Vite
+
+### Create project
 ```bash
 yarn create vite <project-name> --template react-ts
+```
+### Run project
+```bash
+yarn dev
 ```
 [FIGMA](https://www.figma.com/file/ZrGNVNG0kZL6txDv4G8P6s/DSCommerce?type=design&node-id=5-130&mode=design&t=g2WkpiFEtJhXMhai-0)
 
