@@ -6,7 +6,7 @@ yarn create vite <project-name> --template react-ts
 ```
 ### Run project
 ```bash
-yarn dev
+yarn dev --host
 ```
 ### Install react router dom
 ```bash

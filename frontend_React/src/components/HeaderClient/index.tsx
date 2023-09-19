@@ -11,15 +11,17 @@ function HeaderClient() {
           <h1>DSCommerce</h1>
         </Link>
         <div className="dsc-navbar-right">
-          <div className="dsc-menu-item">
-            <Link to="/cart">
-              <img src={cartIcon} alt="Shop cart" />
-            </Link>
+          <div className="dsc-menu-items-container">
+            <div className="dsc-menu-item">
+              <Link to="/cart">
+                <img src={cartIcon} alt="Shop cart" />
+              </Link>
+            </div>
           </div>
-        </div>
         <Link to="/login">
-          Login
+          Entrar
         </Link>
+        </div>
       </nav>
     </header>
   )
