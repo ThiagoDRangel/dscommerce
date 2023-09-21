@@ -1,10 +1,10 @@
-import './styles.css';
 import SearchBar from '../../../components/SearchBar';
 import CatalogCard from '../../../components/CatalogCard';
 import ButtonNextPage from '../../../components/ButtonNextPage';
 import * as productService from '../../../services/product-service';
 import { useEffect, useState } from 'react';
 import { ProductDTO } from '../../../models/product';
+import './styles.css';
 
 export default function Catalog() {
 

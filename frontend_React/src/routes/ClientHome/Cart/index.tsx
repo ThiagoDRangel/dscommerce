@@ -12,6 +12,16 @@ function Cart() {
     setCart(cartService.getCart());
   }
 
+  function handleIncreaseItem(productId: number) {
+    cartService.increaseItem(productId);
+    setCart(cartService.getCart());
+  }
+
+  function handleDecreaseItem(productId: number) {
+    cartService.decreaseItem(productId);
+    setCart(cartService.getCart());
+  }
+
   return (
     <main>
       <section id="cart-container-section" className="dsc=container">
@@ -22,15 +32,15 @@ function Cart() {
         ) : (
           <div className="dsc-card dsc-mb20">
             {cart.items.map(({ subTotal, productId, name, imgUrl, quantity }) => (
-              <div key={productId} className="dsc-cart-item-container dsc-line-bot">
+              <div key={productId} className="dsc-cart-item-container dsc-line-bottom">
                 <div className="dsc-cart-item-left">
                   <img src={imgUrl} alt={name} />
                   <div className="dsc-cart-item-description">
                     <h3>{name}</h3>
                     <div className="dsc-cart-item-quantity-container">
-                      <div className="dsc-cart-item-quantity-btn">-</div>
+                      <div onClick={() => handleDecreaseItem(productId)} className="dsc-cart-item-quantity-btn">-</div>
                       <p>{quantity}</p>
-                      <div className="dsc-cart-item-quanitty-btn">+</div>
+                      <div onClick={() => handleIncreaseItem(productId)} className="dsc-cart-item-quantity-btn">+</div>
                     </div>
                   </div>
                 </div>
