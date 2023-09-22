@@ -12,7 +12,7 @@ export default function Catalog() {
 
     useEffect(() => {
 
-        productService.findAll()
+        productService.findPageRequest(0, "ma")
             .then(response => {
                 setProducts(response.data.content);
             });
