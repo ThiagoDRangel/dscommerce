@@ -42,3 +42,17 @@ classDiagram
   CartService --> CartRepository
 
 ```
+
+### QS
+
+```bash
+yarn add qs@6.11.0 @types/qs@6.9.7
+```
+
+```mermaid
+classDiagram
+  class AuthService {
+    + loginRequest(loginData: CredentialsDTO): Promise
+  }
+
+```
