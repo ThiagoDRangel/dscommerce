@@ -56,3 +56,24 @@ classDiagram
   }
 
 ```
+### Diagram global token in localStorage
+
+```mermaid
+classDiagram
+  class AuthService {
+    + requestBackend(loginData: CredentialsDTO): Promise
+    + logout(): void
+    + saveAccessToken(token: String): void
+    + getAccessToken(): String
+  }
+
+  class AccessTokenRepository {
+    + save(token: String): void
+    + get(): String
+    + remove(): void
+  }
+
+  AuthService --|> AccessTokenRepository
+
+
+```
