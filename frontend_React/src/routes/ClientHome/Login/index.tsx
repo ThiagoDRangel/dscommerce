@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { CredentialsDTO } from '../../../models/auth';
-import { loginRequest } from '../../../services/auth-service';
+import * as authService from '../../../services/auth-service';
 import './styles.css';
 
 function Login() {
@@ -10,10 +10,20 @@ function Login() {
     password: ''
   });
 
-  function handleSubmit(event: any) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    
-    loginRequest(formData);
+    authService.loginRequest(formData)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log('Erro no login', error);
+      });
+  }
+
+  function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
   }
   return (
     <main>
@@ -23,11 +33,25 @@ function Login() {
             <h2>Login</h2>
             <div className="dsc-form-controls-container">
               <div>
-                <input className="dsc-form-control" type="text" placeholder="Email" />
+                <input
+                  className="dsc-form-control"
+                  name="username"
+                  onChange={handleInputChange}
+                  type="text"
+                  value={formData.username}
+                  placeholder="Email"
+                />
                 <div className="dsc-form-error"></div>
               </div>
               <div>
-                <input className="dsc-form-control" type="password" placeholder="Senha" />
+                <input
+                  className="dsc-form-control"
+                  name="password"
+                  onChange={handleInputChange}
+                  type="password"
+                  value={formData.password}
+                  placeholder="Senha"
+                  />
               </div>
             </div>
 
