@@ -137,6 +137,12 @@ nav a {
   align-items: flex-end;
 }
 
+.dsc-logged-user span {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+}
+
 .dsc-logged-user p {
   font-size: 12px;
 }
