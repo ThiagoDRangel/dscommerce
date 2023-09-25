@@ -77,3 +77,13 @@ classDiagram
 
 
 ```
+
+### Configure navigate in file TS
+```bash
+yarn add history@5.3.0
+```
+
+### Configure JWT in file TS
+```bash
+yarn add jwt-decode@3.1.2 @types/jwt-decode@3.1.0
+```
