@@ -330,6 +330,40 @@ nav a {
   display: none;
 }
 
+/*-----------------------------------------------------------------*/
+/* dialog styles */
+
+.dsc-dialog-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.dsc-dialog-box {
+    align-items: center;
+    background-color: var(--dsc-color-card-bg);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.dsc-dialog-box h2 {
+    color: var(--dsc-color-font-primary);
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+
 @media (min-width: 576px) {
   .dsc-tb576 {
     display: table-cell;

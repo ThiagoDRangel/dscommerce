@@ -4,6 +4,9 @@ import './styles.css';
 import { useState, useEffect } from 'react';
 import * as productService from '../../../services/product-service';
 import { ProductDTO } from '../../../models/product';
+import SearchBar from '../../../components/SearchBar';
+import ButtonNextPage from '../../../components/ButtonNextPage';
+import DialogInfo from '../../../components/DialogInfo';
 
 type QueryParams = {
   page: number;
@@ -29,6 +32,15 @@ function ProductListing() {
         });
   }, [queryParams]);
 
+  function handleSearch(searchText: string) {
+    setProducts([]);
+    setQueryParams({...queryParams, page: 0, name: searchText});
+  }
+
+  function handleNextPageClick() {
+    setQueryParams({ ...queryParams, page: queryParams.page + 1 });
+  }
+
   return (
     <main>
       <section id="product-listing-section" className="dsc-container">
@@ -38,11 +50,7 @@ function ProductListing() {
           <div className="dsc-btn dsc-btn-white">Novo</div>
         </div>
 
-        <form className="dsc-search-bar">
-          <button type="submit">🔎︎</button>
-          <input type="text" placeholder="Nome do produto" />
-          <button type="reset">🗙</button>
-        </form>
+        <SearchBar onSearch={handleSearch}/>
 
         <table className="dsc-table dsc-mb20 dsc-mt20">
           <thead>
@@ -58,7 +66,7 @@ function ProductListing() {
           <tbody>
             {
               products.map(({name, id, imgUrl, price}) => (
-                <tr>
+                <tr key={id}>
                   <td className="dsc-tb576">{id}</td>
                   <td><img className="dsc-product-listing-image" src={imgUrl} alt="Computer" /></td>
                   <td className="dsc-tb768">R$ {price}</td>
@@ -70,9 +78,12 @@ function ProductListing() {
             }
           </tbody>
         </table>
-
-        <div className="dsc-btn-next-page">Carregar mais</div>
+        {
+          !isLastPage &&
+          <ButtonNextPage onNextPage={handleNextPageClick}/>
+        }
       </section>
+      <DialogInfo />
     </main>
   );
 }
