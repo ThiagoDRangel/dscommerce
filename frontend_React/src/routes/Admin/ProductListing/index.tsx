@@ -1,9 +1,34 @@
 import editIcon from '../../../assets/edit.svg';
 import deleteIcon from '../../../assets/delete.svg';
-import product from '../../../assets/computer.png';
 import './styles.css';
+import { useState, useEffect } from 'react';
+import * as productService from '../../../services/product-service';
+import { ProductDTO } from '../../../models/product';
+
+type QueryParams = {
+  page: number;
+  name: string;
+}
 
 function ProductListing() {
+
+  const [queryParams, setQueryParams] = useState<QueryParams>({
+    page: 0,
+    name: ""
+  });
+  const [products, setProducts] = useState<ProductDTO[]>([]);
+  const [isLastPage, setIsLastPage] = useState(false);
+
+  useEffect(() => {
+
+    productService.findPageRequest(queryParams.page, queryParams.name)
+        .then(response => {
+            const nextPage = response.data.content
+            setProducts(products.concat(nextPage));
+            setIsLastPage(response.data.last);
+        });
+  }, [queryParams]);
+
   return (
     <main>
       <section id="product-listing-section" className="dsc-container">
@@ -31,31 +56,18 @@ function ProductListing() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="dsc-tb576">341</td>
-              <td><img className="dsc-product-listing-image" src={product} alt="Computer" /></td>
-              <td className="dsc-tb768">R$ 5000,00</td>
-              <td className="dsc-txt-left">Computador Gamer XT Plus Ultra</td>
-              <td><img className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>
-              <td><img className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" /></td>
-            </tr>
-            <tr>
-              <td className="dsc-tb576">341</td>
-              <td><img className="dsc-product-listing-image" src={product} alt="Computer" /></td>
-              <td className="dsc-tb768">R$ 5000,00</td>
-              <td className="dsc-txt-left">Computador Gamer XT Plus Ultra</td>
-              <td><img className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>
-              <td><img className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" /></td>
-            </tr>
-            <tr>
-              <td className="dsc-tb576">341</td>
-              <td><img className="dsc-product-listing-image" src={product} alt="Computer" /></td>
-              <td className="dsc-tb768">R$ 5000,00</td>
-              <td className="dsc-txt-left">Computador Gamer XT Plus Ultra</td>
-              <td><img className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>
-              <td><img className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" /></td>
-            </tr>
-            
+            {
+              products.map(({name, id, imgUrl, price}) => (
+                <tr>
+                  <td className="dsc-tb576">{id}</td>
+                  <td><img className="dsc-product-listing-image" src={imgUrl} alt="Computer" /></td>
+                  <td className="dsc-tb768">R$ {price}</td>
+                  <td className="dsc-txt-left">{name}</td>
+                  <td><img className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>
+                  <td><img className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" /></td>
+                </tr>
+              ))
+            }
           </tbody>
         </table>
 
