@@ -354,6 +354,7 @@ nav a {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 200px;
 }
 
 .dsc-dialog-box h2 {
@@ -364,6 +365,9 @@ nav a {
 }
 
 .dsc-dialog-btn-container {
+    display: flex;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr;
     width: 100%;
 }
 

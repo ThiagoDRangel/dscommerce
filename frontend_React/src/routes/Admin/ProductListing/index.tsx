@@ -7,6 +7,7 @@ import { ProductDTO } from '../../../models/product';
 import SearchBar from '../../../components/SearchBar';
 import ButtonNextPage from '../../../components/ButtonNextPage';
 import DialogInfo from '../../../components/DialogInfo';
+import DialogConfirmation from '../../../components/DialogConfirmation';
 
 type QueryParams = {
   page: number;
@@ -24,6 +25,10 @@ function ProductListing() {
   const [dialogInfoData, setDialogInfoData] = useState({
     visible: false,
     message: "Success!"
+  });
+  const [dialogDeleteData, setDialogDeleteData] = useState({
+    visible: false,
+    message: "Delete product?"
   });
 
   useEffect(() => {
@@ -50,7 +55,11 @@ function ProductListing() {
   }
 
   function handleDeleteClick() {
-    setDialogInfoData({ ...dialogInfoData, visible: true });
+    setDialogDeleteData({ ...dialogDeleteData, visible: true });
+  }
+
+  function handleDialogConfirmationAnswer(answer: boolean) {
+    setDialogDeleteData({ ...dialogDeleteData, visible: false });
   }
 
   return (
@@ -84,7 +93,7 @@ function ProductListing() {
                   <td className="dsc-tb768">R$ {price}</td>
                   <td className="dsc-txt-left">{name}</td>
                   <td><img className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>
-                  <td><img className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" /></td>
+                  <td><img className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" onClick={handleDeleteClick}/></td>
                 </tr>
               ))
             }
@@ -100,6 +109,12 @@ function ProductListing() {
         <DialogInfo
           message={dialogInfoData.message}
           onDialogClose={handleDialogInfoClose} />
+      }
+       {
+        dialogDeleteData.visible &&
+        <DialogConfirmation
+          message={dialogDeleteData.message}
+          onDialogAnswer={handleDialogConfirmationAnswer} />
       }
     </main>
   );
