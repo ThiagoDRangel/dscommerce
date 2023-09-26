@@ -363,6 +363,10 @@ nav a {
     margin-bottom: 20px;
 }
 
+.dsc-dialog-btn-container {
+    width: 100%;
+}
+
 
 @media (min-width: 576px) {
   .dsc-tb576 {

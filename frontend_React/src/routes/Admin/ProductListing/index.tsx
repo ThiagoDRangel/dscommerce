@@ -21,6 +21,10 @@ function ProductListing() {
   });
   const [products, setProducts] = useState<ProductDTO[]>([]);
   const [isLastPage, setIsLastPage] = useState(false);
+  const [dialogInfoData, setDialogInfoData] = useState({
+    visible: false,
+    message: "Success!"
+  });
 
   useEffect(() => {
 
@@ -39,6 +43,14 @@ function ProductListing() {
 
   function handleNextPageClick() {
     setQueryParams({ ...queryParams, page: queryParams.page + 1 });
+  }
+
+  function handleDialogInfoClose() {
+    setDialogInfoData({ ...dialogInfoData, visible: false });
+  }
+
+  function handleDeleteClick() {
+    setDialogInfoData({ ...dialogInfoData, visible: true });
   }
 
   return (
@@ -83,7 +95,12 @@ function ProductListing() {
           <ButtonNextPage onNextPage={handleNextPageClick}/>
         }
       </section>
-      <DialogInfo />
+      {
+        dialogInfoData.visible &&
+        <DialogInfo
+          message={dialogInfoData.message}
+          onDialogClose={handleDialogInfoClose} />
+      }
     </main>
   );
 }
