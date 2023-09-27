@@ -27,6 +27,7 @@ function ProductListing() {
     message: "Success!"
   });
   const [dialogDeleteData, setDialogDeleteData] = useState({
+    id: 0,
     visible: false,
     message: "Delete product?"
   });
@@ -54,11 +55,24 @@ function ProductListing() {
     setDialogInfoData({ ...dialogInfoData, visible: false });
   }
 
-  function handleDeleteClick() {
-    setDialogDeleteData({ ...dialogDeleteData, visible: true });
+  function handleDeleteClick(productId: number) {
+    setDialogDeleteData({ ...dialogDeleteData, id: productId, visible: true });
   }
 
-  function handleDialogConfirmationAnswer(answer: boolean) {
+  function handleDialogConfirmationAnswer(answer: boolean, productId: number) {
+    if (answer) {
+      productService.deleteById(productId)
+        .then(() => {
+          setProducts([]);
+          setQueryParams({ ...queryParams, page: 0 });
+        })
+        .catch(error => {
+          setDialogInfoData({
+            visible: true,
+            message: error.response.data.error
+          });
+        })
+    }
     setDialogDeleteData({ ...dialogDeleteData, visible: false });
   }
 
@@ -93,7 +107,7 @@ function ProductListing() {
                   <td className="dsc-tb768">R$ {price}</td>
                   <td className="dsc-txt-left">{name}</td>
                   <td><img className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>
-                  <td><img className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" onClick={handleDeleteClick}/></td>
+                  <td><img className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" onClick={() => handleDeleteClick(id)}/></td>
                 </tr>
               ))
             }
@@ -113,6 +127,7 @@ function ProductListing() {
        {
         dialogDeleteData.visible &&
         <DialogConfirmation
+          id={dialogDeleteData.id}
           message={dialogDeleteData.message}
           onDialogAnswer={handleDialogConfirmationAnswer} />
       }
