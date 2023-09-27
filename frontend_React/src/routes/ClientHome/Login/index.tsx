@@ -34,7 +34,8 @@ function Login() {
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    authService.loginRequest({username: formData.username.value, password: formData.password.value} )
+    console.log(forms.toValues(formData));
+    authService.loginRequest(forms.toValues(formData))
       .then((response) => {
         authService.saveAccessToken(response.data.access_token);
         setContextTokenPayload(authService.getAccessTokenPayload());
