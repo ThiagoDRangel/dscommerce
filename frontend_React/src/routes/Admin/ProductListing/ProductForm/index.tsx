@@ -55,7 +55,9 @@ function ProductForm() {
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
-    setFormData(forms.update(formData, name, value));
+    const dataUpdated = forms.update(formData, name, value);
+    const dataValidated = forms.validate(dataUpdated, name);
+    setFormData(dataValidated);
   }
 
   return (
@@ -71,13 +73,15 @@ function ProductForm() {
                   className="dsc-form-control"
                   onChange={handleInputChange}
                 />
+                <div className="dsc-form-error">{formData.name.message}</div>
               </div>
               <div>
                 <FormInput
                     { ...formData.price}
                     className="dsc-form-control"
                     onChange={handleInputChange}
-                  />
+                />
+                <div className="dsc-form-error">{formData.price.message}</div>
               </div>
               <div>
                 <FormInput

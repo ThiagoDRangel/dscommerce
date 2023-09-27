@@ -1,9 +1,9 @@
 function FormInput(props: any) {
 
-  const { validation, onTurnDirty, ...inputProps } = props;
+  const { validation, invalid, onTurnDirty, ...inputProps } = props;
 
   return (
-    <input { ...inputProps } />
+    <input { ...inputProps } data-invalid={invalid} />
   );
 }
 
