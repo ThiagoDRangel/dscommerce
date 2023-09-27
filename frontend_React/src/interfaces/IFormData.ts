@@ -1,6 +1,6 @@
 export default interface FormData {
   [key: string]: {
-    value: string;
+    value: string | number;
     id: string;
     name: string;
     type: string;
