@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react';
 import * as authService from '../../../services/auth-service';
-import './styles.css';
+import * as forms from '../../../utils/forms';
 import { useNavigate } from 'react-router-dom';
 import { ContextToken } from '../../../utils/context-token';
 import IFormData from '../../../interfaces/IFormData';
 import FormInput from '../../../components/FormInput';
+import './styles.css';
 
 function Login() {
 
@@ -46,10 +47,7 @@ function Login() {
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: { ...formData[name], value: value }
-    });
+    setFormData(forms.update(formData, name, value));
   }
   return (
     <main>
