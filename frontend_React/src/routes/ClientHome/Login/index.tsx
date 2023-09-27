@@ -50,6 +50,7 @@ function Login() {
     const { name, value } = event.target;
     setFormData(forms.update(formData, name, value));
   }
+
   return (
     <main>
       <section id="login-section" className="dsc-container">
