@@ -48,7 +48,13 @@ function Login() {
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
-    setFormData(forms.update(formData, name, value));
+    const result = forms.updateAndValidate(formData, name, value);
+    setFormData(result);
+  }
+
+  function handleTurnDirty(name: string) {
+    const newFormData = forms.dirtyAndValidate(formData, name);
+    setFormData(newFormData);
   }
 
   return (
@@ -63,6 +69,7 @@ function Login() {
                   { ...formData.username}
                   className="dsc-form-control"
                   onChange={handleInputChange}
+                  onTurnDirty={handleTurnDirty}
                 />
                 <div className="dsc-form-error"></div>
               </div>
@@ -71,6 +78,7 @@ function Login() {
                   { ...formData.password}
                   className="dsc-form-control"
                   onChange={handleInputChange}
+                  onTurnDirty={handleTurnDirty}
                 />
               </div>
             </div>

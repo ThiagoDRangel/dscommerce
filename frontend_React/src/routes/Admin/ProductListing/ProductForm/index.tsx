@@ -41,9 +41,6 @@ function ProductForm() {
 
   useEffect(() => {
 
-    const result = forms.toDirty(formData, "price");
-    console.log(result);
-
     if (isEditing) {
       productService.findById(Number(params.productId))
         .then(response => {
@@ -55,13 +52,12 @@ function ProductForm() {
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
-    const dataUpdated = forms.update(formData, name, value);
-    const dataValidated = forms.validate(dataUpdated, name);
-    setFormData(dataValidated);
+    const result = forms.updateAndValidate(formData, name, value);
+    setFormData(result);
   }
 
   function handleTurnDirty(name: string) {
-    const newFormData = forms.toDirty(formData, name);
+    const newFormData = forms.dirtyAndValidate(formData, name);
     setFormData(newFormData);
   }
 
