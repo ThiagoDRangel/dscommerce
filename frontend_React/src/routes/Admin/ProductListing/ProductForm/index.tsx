@@ -26,7 +26,7 @@ function ProductForm() {
       type: "text",
       placeholder: "Nome",
       validation: function(value: string) {
-        return /^[a-zA-Z0-9 ]{3,80}$/.test(value);
+        return /^[a-zA-Z0-9 ]{3,80}$/.test(String(value));
       },
       message: "O nome deve ter entre 3 e 80 caracteres",
     },
@@ -36,7 +36,7 @@ function ProductForm() {
       name: "price",
       type: "number",
       placeholder: "Preço",
-      validation: function(value: any) {
+      validation: function(value: number | string) {
         return Number(value) > 0;
       },
       message: "O preço deve ser maior que zero",
@@ -63,6 +63,7 @@ function ProductForm() {
       value: [],
       id: "categories",
       name: "categories",
+      type: "category",
       placeholder: "Categorias",
       validation: function(value: CategoryDTO[]) {
         return value.length > 0;
@@ -87,7 +88,7 @@ function ProductForm() {
           setFormData(newFormData);
         })
     }
-  }, []);
+  }, [isEditing, params.productId, formData]);
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
@@ -163,14 +164,14 @@ function ProductForm() {
                   className="dsc-form-control dsc-form-select-container"
                   styles={selectStyles}
                   options={categories}
-                  onChange={(obj: any) =>{
+                  onChange={(obj: { name: string, value: string }) => {
                     const newFormData = forms.updateAndValidate(formData, 'categories', obj);
                     setFormData(newFormData);
                   }}
                   onTurnDirty={handleTurnDirty}
                   isMulti
-                  getOptionLabel={(obj: any) => obj.name}
-                  getOptionValue={(obj: any) => String(obj.id)}
+                  getOptionLabel={(obj: { name: string }) => obj.name}
+                  getOptionValue={(obj: { id: number }) => String(obj.id)}
                 />
               <div className="dsc-form-error">{formData.categories.message}</div>
               </div>
