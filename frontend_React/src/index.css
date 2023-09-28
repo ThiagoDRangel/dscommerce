@@ -259,6 +259,17 @@ nav a {
   padding-left: 4px;
 }
 
+.dsc-form-global-error {
+  color: var(--dsc-color-error);
+  border: 1px solid var(--dsc-color-error);
+  border-radius: 5px;
+  display: flex;
+  font-size: 12px;
+  padding: 5px 10px;
+  justify-content: center;
+  width: 100%;
+}
+
 .dsc-form-select-container {
   padding: unset;
   height: unset;
