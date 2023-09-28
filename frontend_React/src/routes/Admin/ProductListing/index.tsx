@@ -62,6 +62,10 @@ function ProductListing() {
     setDialogDeleteData({ ...dialogDeleteData, id: productId, visible: true });
   }
 
+  function handleUpdateClick(productId: number) {
+    navigate(`/admin/products/${productId}`);
+  }
+
   function handleDialogConfirmationAnswer(answer: boolean, productId: number) {
     if (answer) {
       productService.deleteById(productId)
@@ -115,8 +119,21 @@ function ProductListing() {
                   <td><img className="dsc-product-listing-image" src={imgUrl} alt="Computer" /></td>
                   <td className="dsc-tb768">R$ {price}</td>
                   <td className="dsc-txt-left">{name}</td>
-                  <td><img className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>
-                  <td><img className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" onClick={() => handleDeleteClick(id)}/></td>
+                  <td>
+                    <img
+                      alt="Editar"
+                      className="dsc-product-listing-btn"
+                      onClick={() => handleUpdateClick(id)}
+                      src={editIcon}
+                    />
+                  </td>
+                  <td>
+                    <img
+                      className="dsc-product-listing-btn"
+                      onClick={() => handleDeleteClick(id)}
+                      src={deleteIcon} alt="Deletar"
+                    />
+                  </td>
                 </tr>
               ))
             }
