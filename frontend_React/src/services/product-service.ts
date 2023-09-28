@@ -37,3 +37,12 @@ export function updateRequest(obj: ProductDTO) {
         data: obj
     });
 }
+
+export function insertRequest(obj: ProductDTO) {
+    return requestBackend({
+        url: "/products",
+        method: "POST",
+        withCredentials: true,
+        data: obj
+    });
+}
