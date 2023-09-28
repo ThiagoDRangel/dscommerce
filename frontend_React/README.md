@@ -87,3 +87,8 @@ yarn add history@5.3.0
 ```bash
 yarn add jwt-decode@3.1.2 @types/jwt-decode@3.1.0
 ```
+
+### Configure React select
+```bash
+yarn add react-select@5.6.0
+```
