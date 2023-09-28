@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import IFormData from '../../../../interfaces/IFormData';
 import * as forms from '../../../../utils/forms';
 import * as productService from '../../../../services/product-service';
@@ -14,6 +14,7 @@ import { selectStyles } from '../../../../utils/select';
 function ProductForm() {
 
   const params = useParams();
+  const navigate = useNavigate();
   const isEditing = params.productId !== 'create';
   const [categories, setCategories] = useState<CategoryDTO[]>([]);
 
@@ -54,7 +55,7 @@ function ProductForm() {
       type: "text",
       placeholder: "Descrição",
       validation: function(value: string) {
-        return /^[a-zA-Z0-9 ]{10,}$/.test(value);
+        return /^.{11,}$/.test(value);
       },
       message: "A descrição deve ter no mínimo 10 caracteres",
     },
@@ -106,6 +107,14 @@ function ProductForm() {
       setFormData(formDataValidated);
       return;
     }
+    const requestBody = forms.toValues(formData);
+    if (isEditing) {
+      requestBody.id = Number(params.productId);
+    }
+    productService.updateRequest(requestBody)
+      .then(() => {
+        navigate("/admin/products");
+      })
   }
 
   return (
