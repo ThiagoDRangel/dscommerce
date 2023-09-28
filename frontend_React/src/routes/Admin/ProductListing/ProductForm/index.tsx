@@ -5,6 +5,7 @@ import * as productService from '../../../../services/product-service';
 import { useEffect, useState } from 'react';
 import FormInput from '../../../../components/FormInput';
 import './styles.css';
+import FormTextArea from '../../../../components/FormTextArea';
 
 function ProductForm() {
 
@@ -40,6 +41,17 @@ function ProductForm() {
       name: "imgUrl",
       type: "text",
       placeholder: "Imagem",
+    },
+    description: {
+      value: "",
+      id: "description",
+      name: "description",
+      type: "text",
+      placeholder: "Descrição",
+      validation: function(value: string) {
+        return /^[a-zA-Z0-9 ]{10,}$/.test(value);
+      },
+      message: "A descrição deve ter no mínimo 10 caracteres",
     },
   });
 
@@ -97,6 +109,15 @@ function ProductForm() {
                     onChange={handleInputChange}
                     onTurnDirty={handleTurnDirty}
                   />
+              </div>
+              <div>
+                <FormTextArea
+                  { ...formData.description}
+                  className="dsc-form-control dsc-textarea"
+                  onChange={handleInputChange}
+                  onTurnDirty={handleTurnDirty}
+                />
+                <div className="dsc-form-error">{formData.description.message}</div>
               </div>
             </div>
 
