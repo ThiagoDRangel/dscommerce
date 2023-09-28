@@ -11,12 +11,12 @@ export default function FormSelect(props: any) {
   } = props;
 
   function handleBlur() {
-    onTurnDirty(props.name)
+    onTurnDirty(props.name);
   }
 
   return (
     <div
-    className={className}
+      className={className}
       data-invalid={invalid}
       data-dirty={dirty}
     >
@@ -25,5 +25,5 @@ export default function FormSelect(props: any) {
         onBlur={handleBlur}
       />
     </div>
-  )
+  );
 }
