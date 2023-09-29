@@ -92,3 +92,8 @@ yarn add jwt-decode@3.1.2 @types/jwt-decode@3.1.0
 ```bash
 yarn add react-select@5.6.0
 ```
+
+### Install chartjs-2
+```bash
+yarn add chart.js react-chartjs-2
+```

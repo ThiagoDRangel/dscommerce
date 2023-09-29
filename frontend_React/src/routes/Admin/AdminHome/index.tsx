@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { UserDTO } from '../../../models/user';
 import * as userService from '../../../services/user-service';
+import PieChart from '../../../components/PieChart';
 import './styles.css';
 
 function AdminHome() {
@@ -11,7 +12,6 @@ function AdminHome() {
     userService.findMe()
       .then(response => {
         setUser(response.data);
-        console.log(response.data);
     });
   }, []);
 
@@ -20,6 +20,7 @@ function AdminHome() {
       <section id="admin-home-section" className="dsc-container">
         <h2 className="dsc-section-title dsc-mb20">Bem-vindo à àrea administrativa {user?.name}</h2>
       </section>
+      <PieChart />
     </main>
   );
 }
