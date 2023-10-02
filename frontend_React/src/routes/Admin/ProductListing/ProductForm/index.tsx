@@ -88,7 +88,8 @@ function ProductForm() {
           setFormData(newFormData);
         })
     }
-  }, [isEditing, params.productId, formData]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isEditing, params.productId]);
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
